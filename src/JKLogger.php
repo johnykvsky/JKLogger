@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace johnykvsky\Utils;
 
 use DateTime;
@@ -269,7 +271,7 @@ class JKLogger extends AbstractLogger
     {
         $originalTime = microtime(true);
         $micro = sprintf("%06d", ($originalTime - floor($originalTime)) * 1000000);
-        $date = new \DateTime(date('Y-m-d H:i:s.'.$micro, $originalTime));
+        $date = new \DateTime(date('Y-m-d H:i:s.'.$micro, (int) $originalTime));
 
         return $date->format($this->options['dateFormat']);
     }

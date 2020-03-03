@@ -179,6 +179,13 @@ For the obsessive compulsive
 $ composer test
 ```
 
+## Code checking
+
+``` bash
+$ composer phpstan
+$ composer phpstan-max
+```
+
 
 ## Security
 

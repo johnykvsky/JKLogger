@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
 use johnykvsky\Utils\JKLogger;
 use Psr\Log\LogLevel;
 
-class LoggerTest extends PHPUnit\Framework\TestCase
+class LoggerTest extends TestCase
 {
     private $logPath;
 
     private $logger;
     private $errLogger;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->logPath = __DIR__.'/logs';
         $this->logger = new JKLogger($this->logPath, LogLevel::DEBUG, array ('flushFrequency' => 1));
@@ -57,8 +60,8 @@ class LoggerTest extends PHPUnit\Framework\TestCase
 
     public function testLogLevelThreshold()
     {
-        $this->logger->setLogLevelThreshold(1);
-        $this->assertEquals($this->logger->getLogLevelThreshold(), 1);
+        $this->logger->setLogLevelThreshold(LogLevel::ERROR);
+        $this->assertEquals($this->logger->getLogLevelThreshold(), LogLevel::ERROR);
     }
 
 
@@ -95,7 +98,8 @@ class LoggerTest extends PHPUnit\Framework\TestCase
         return trim($t);
     }
 
-    public function tearDown() {
+    protected function tearDown(): void
+    {
         #@unlink($this->logger->getLogFilePath());
         #@unlink($this->errLogger->getLogFilePath());
     }
