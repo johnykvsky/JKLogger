@@ -14,9 +14,9 @@
     "require-dev": {
         "phpunit/phpunit" : "~8.5.2",
         "johnykvsky/faker": "~1.14",
-        "phpstan/phpstan": "~0.12.13",
-        "phpstan/extension-installer": "~1.0.3",
-        "thecodingmachine/phpstan-strict-rules": "~0.12.0"
+        "phpstan/phpstan": "~0.12.92",
+        "phpstan/extension-installer": "~1.1.0",
+        "thecodingmachine/phpstan-strict-rules": "~0.12.1"
     },
     "license": "MIT",
     "authors": [
