@@ -9,12 +9,12 @@
     ],
     "homepage": "https://github.com/johnykvsky/JKLogger",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4 || ^8.0",
         "psr/log": "^1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit" : "~8.5.2",
-        "fzaninotto/faker": "~1.9.1",
+        "johnykvsky/faker": "~1.14",
         "phpstan/phpstan": "~0.12.13",
         "phpstan/extension-installer": "~1.0.3",
         "thecodingmachine/phpstan-strict-rules": "~0.12.0"

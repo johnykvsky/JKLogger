@@ -2,10 +2,8 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
+[![Build Status][ico-github-actions]][link-github-actions]
 
 Simple Logging for PHP. Credits goes to [Kenny Katzgrau](http://twitter.com/katzgrau) and [Dan Horrigan](http://twitter.com/dhrrgn)
 
@@ -202,14 +200,10 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [ico-version]: https://img.shields.io/packagist/v/johnykvsky/JKLogger.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/johnykvsky/JKLogger/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/johnykvsky/JKLogger.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/johnykvsky/JKLogger.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/johnykvsky/JKLogger.svg?style=flat-square
+[ico-github-actions]: https://github.com/johnykvsky/JKLogger/actions/workflows/php.yml/badge.svg
 
 [link-packagist]: https://packagist.org/packages/johnykvsky/JKLogger
-[link-travis]: https://travis-ci.org/johnykvsky/JKLogger
-[link-scrutinizer]: https://scrutinizer-ci.com/g/johnykvsky/JKLogger/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/johnykvsky/JKLogger
 [link-downloads]: https://packagist.org/packages/johnykvsky/JKLogger
 [link-author]: https://github.com/johnykvsky
+[link-github-actions]: https://github.com/johnykvsky/JKLogger/actions
