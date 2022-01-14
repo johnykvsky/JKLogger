@@ -14,10 +14,7 @@ use RuntimeException;
  */
 class JKLogger extends AbstractLogger
 {
-    /**
-     * @var mixed[] $options Core options
-     */
-    protected $options = [
+    protected array $options = [
         'extension' => 'txt',
         'dateFormat' => 'Y-m-d G:i:s.u',
         'filename' => false,
@@ -27,14 +24,10 @@ class JKLogger extends AbstractLogger
         'appendContext' => true,
         'json' => false,
     ];
-    /**
-     * @var string $logLevelThreshold Current minimum logging threshold
-     */
-    protected $logLevelThreshold = LogLevel::DEBUG;
-    /**
-     * @var array Log Levels
-     */
-    protected $logLevels = [
+
+    protected string $logLevelThreshold = LogLevel::DEBUG;
+
+    protected array $logLevels = [
         LogLevel::EMERGENCY => 0,
         LogLevel::ALERT => 1,
         LogLevel::CRITICAL => 2,
@@ -44,30 +37,13 @@ class JKLogger extends AbstractLogger
         LogLevel::INFO => 6,
         LogLevel::DEBUG => 7,
     ];
-    /**
-     * @var string $logFilePath Path to the log file
-     */
-    private $logFilePath;
-    /**
-     * @var int $logLineCount Number of lines logged in this instance's lifetime
-     */
-    private $logLineCount = 0;
-    /**
-     * @var string $lastLine This holds the last line logged to the logger (Used for unit tests)
-     */
-    private $lastLine = '';
 
-    /**
-     * @var integer $defaultPermissions Octal notation for default permissions of the log file
-     */
-    private $defaultPermissions = 0777;
+    private string $logFilePath;
+    private int $logLineCount = 0;
+    private string $lastLine = '';
+    private int $defaultPermissions = 0777;
 
-    /**
-     * @param string $logDirectory File path to the logging directory
-     * @param string $logLevelThreshold The LogLevel Threshold
-     * @param mixed[] $options
-     * @return void
-     */
+
     public function __construct(string $logDirectory, string $logLevelThreshold = LogLevel::DEBUG, array $options = [])
     {
         $this->logLevelThreshold = $logLevelThreshold;
@@ -96,48 +72,27 @@ class JKLogger extends AbstractLogger
         }
     }
 
-    /**
-     * @param string $stdOutPath
-     * @return void
-     */
     public function setLogToStdOut(string $stdOutPath): void
     {
         $this->logFilePath = $stdOutPath;
     }
 
-    /**
-     * @param string $dateFormat Valid format string for date()
-     * @return void
-     */
     public function setDateFormat(string $dateFormat): void
     {
         $this->options['dateFormat'] = $dateFormat;
     }
 
-    /**
-     * @return string
-     */
     public function getLogLevelThreshold(): string
     {
         return $this->logLevelThreshold;
     }
 
-    /**
-     * @param string $logLevelThreshold The log level threshold
-     * @return void
-     */
     public function setLogLevelThreshold(string $logLevelThreshold): void
     {
         $this->logLevelThreshold = $logLevelThreshold;
     }
 
-    /**
-     * @param string $level
-     * @param mixed $message
-     * @param array $context
-     * @return void
-     */
-    public function log($level, $message, array $context = [])
+    public function log($level, mixed $message, array $context = []): void
     {
         if ($this->logLevels[$this->logLevelThreshold] < $this->logLevels[$level]) {
             return;
@@ -147,15 +102,7 @@ class JKLogger extends AbstractLogger
         $this->write($message);
     }
 
-    /**
-     * Formats the message for logging.
-     *
-     * @param string $level The Log Level of the message
-     * @param mixed $message The message to log
-     * @param mixed[] $context The context
-     * @return string
-     */
-    protected function formatMessage(string $level, $message, array $context): string
+    protected function formatMessage(string $level, mixed $message, array $context): string
     {
         if (!empty($this->options['json'])) {
             $message = json_encode($message);
@@ -174,13 +121,7 @@ class JKLogger extends AbstractLogger
         return $message . PHP_EOL;
     }
 
-    /**
-     * @param string $level
-     * @param $rawMessage
-     * @param array $context
-     * @return string
-     */
-    private function getFormattedMessage(string $level, $rawMessage, array $context): string
+    private function getFormattedMessage(string $level, mixed $rawMessage, array $context): string
     {
         $parts = [
             'date' => $this->getTimestamp(),
@@ -216,11 +157,6 @@ class JKLogger extends AbstractLogger
         return $date->format($this->options['dateFormat']);
     }
 
-    /**
-     * @param string $message The message to log
-     * @param string $value New value to replace
-     * @return string
-     */
     private function replaceMessage(string $message, string $value): string
     {
         if (!empty($this->options['json'])) {
@@ -230,24 +166,11 @@ class JKLogger extends AbstractLogger
         return str_replace('{message}', $value, $message);
     }
 
-    /**
-     * Indents the given string with the given indent.
-     *
-     * @param string $string The string to indent
-     * @param string $indent What to use as the indent.
-     * @return string
-     */
     protected function indent(string $string, string $indent = '    '): string
     {
         return $indent . str_replace("\n", "\n" . $indent, $string);
     }
 
-    /**
-     * Takes the given context and coverts it to a string.
-     *
-     * @param mixed[] $context The Context
-     * @return string
-     */
     protected function contextToString(array $context): string
     {
         $export = '';
@@ -271,10 +194,6 @@ class JKLogger extends AbstractLogger
         return str_replace(['\\\\', '\\\''], ['\\', '\''], rtrim($export));
     }
 
-    /**
-     * @param string $message Line to write to the log
-     * @return void
-     */
     public function write(string $message): void
     {
         if (file_put_contents($this->getLogFilePath(), $message, FILE_APPEND) === false) {
@@ -295,9 +214,6 @@ class JKLogger extends AbstractLogger
         return $this->logFilePath;
     }
 
-    /**
-     * @param string $logDirectory
-     */
     public function setLogFilePath(string $logDirectory): void
     {
         if ($this->options['filename']) {
@@ -316,17 +232,11 @@ class JKLogger extends AbstractLogger
         }
     }
 
-    /**
-     * @return string
-     */
     public function getLastLogLine(): string
     {
         return $this->lastLine;
     }
 
-    /**
-     * @return int
-     */
     public function getLogLineCount(): int
     {
         return $this->logLineCount;

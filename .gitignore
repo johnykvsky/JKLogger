@@ -7,3 +7,4 @@ coverage/
 .buildpath
 .idea/
 /tests/logs/*
+.phpunit.result.cache
