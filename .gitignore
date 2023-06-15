@@ -8,3 +8,5 @@ coverage/
 .idea/
 /tests/logs/*
 .phpunit.result.cache
+.phpunit.cache
+phpunit
